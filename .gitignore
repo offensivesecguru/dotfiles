@@ -1,0 +1,6 @@
+*.ovpn
+*.key
+id_*
+*.pem
+.env
+*history*
