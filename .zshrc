@@ -146,3 +146,15 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github 2>/dev/null
 alias dotpush='cd ~/dotfiles && git add -A && git commit -m "update $(date +%F)" && git push; cd -'
+export PATH="$HOME/.local/bin:$PATH"
+
+# New lab box: newbox <platform> <boxname> <ip>
+newbox() {
+  [[ $# -ne 3 ]] && { echo "Usage: newbox <platform> <box> <ip>"; return 1; }
+  local d=~/labs/$1/$2
+  mkdir -p $d/{nmap,exploits,loot}
+  echo "$3" > $d/scope.txt
+  [[ -f $d/notes.md ]] || echo "# $2 ($3)\n" > $d/notes.md
+  cd $d && export ip=$3
+  echo "Box ready: $d  |  target: $ip"
+}
