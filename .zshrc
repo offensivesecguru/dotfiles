@@ -145,3 +145,4 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
   eval "$(ssh-agent -s)" > /dev/null
 fi
 ssh-add -l &>/dev/null || ssh-add ~/.ssh/id_ed25519_github 2>/dev/null
+alias dotpush='cd ~/dotfiles && git add -A && git commit -m "update $(date +%F)" && git push; cd -'
